@@ -1,12 +1,15 @@
-// import { useState } from 'react'
+/* import { useState } from 'react' */
 import './App.css';
 import Form from './main.jsx';
 import { CgGoogle } from 'react-icons/cg';
 
+
+
 const App = () => {
+  
 return (
 <div className = "app">
-<Form /> 
+    <Form /> 
 <CgGoogle />
 </div>);
 };
