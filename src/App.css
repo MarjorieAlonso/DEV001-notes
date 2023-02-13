@@ -24,6 +24,7 @@ p {
   border:none;
   width: 200px;
   height: 25px;
+  background-color: white;
 }
 #password{
   font-family: 'Poppins', sans-serif;
@@ -32,19 +33,53 @@ p {
   border: none;
   width: 200px;
   height: 25px;
+  background-color: white;
 }
 #update {
   font-family: 'Poppins', sans-serif;
   background-color: #B4A4D7;
+  border:none;
+  border-radius: 5px;
 }
 #botonGoogle {
   font-family: 'Poppins', sans-serif;
-  background-color: #e91414;
+  background-color: #d9d9d9;
   margin-top: 15px;
+  border:none;
+  border-radius: 5px;
 }
+/* #username{
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5px;
+  border:none;
+  width: 200px;
+  height: 25px;
+  background-color:white;
+ 
+} */
+/* #mail{
+  font-family: 'Poppins', sans-serif;
+  margin-top: 8px;
+  border-radius: 5px;
+  border:none;
+  width: 200px;
+  height: 25px;
+  background-color:white;
+  
 
-@media (prefers-reduced-motion: no-preference) {
+} */
+/* #contraseña{
+  font-family: 'Poppins', sans-serif;
+  margin-top: 8px;
+  border-radius: 5px;
+  border:none;
+  width: 200px;
+  height: 25px;
+  background-color:white;
+ 
+} */
+ @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-}
+} 

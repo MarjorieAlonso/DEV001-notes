@@ -12,12 +12,12 @@ const Form = () => {
   return (
     <form>
       <h1>MOOD TRACKER</h1>
-      <input type="text" id="email" placeholder="email"></input>
-      <br></br>
-      <input type="text" id='password' placeholder='password'></input>
+      <input type="text" id="email" placeholder="email"/>
+      <br/>
+      <input type="password" id='password' placeholder='password'/>
       <p>Use this app to track your feelings and improve your state of mind</p>
       <button id="update">Update my mood</button>
-      <br></br>
+      <br/>
       <button type="submit" id="botonGoogle">Login with Google</button>
     </form>
   );
