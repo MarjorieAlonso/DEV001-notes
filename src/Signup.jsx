@@ -1,10 +1,5 @@
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/function-component-definition */
-/* eslint-disable react/button-has-type */
+
 import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// eslint-disable-next-line import/no-cycle
-// import App from './App';
 import './index.css';
 
 const SignUp = () => {
