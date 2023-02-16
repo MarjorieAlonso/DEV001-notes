@@ -14,6 +14,7 @@ import {
 } from 'react-router-dom';
 import Form from './main.jsx';
 import SignUp from './Signup';
+import Board from './board';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Form />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path ="/board" element={<Board/>}/>
       </Routes>
     </BrowserRouter>
   );

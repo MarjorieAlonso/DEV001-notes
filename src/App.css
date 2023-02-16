@@ -81,6 +81,36 @@ p {
   border:none;
   border-radius: 5px;
 }
+#emoticones{
+  display:flex;
+ align-content: space-around;
+
+}
+input [type=radio] [id^="emoji"] { 
+display: none;
+}
+textarea{
+  width: 400px;
+  height: 200px;
+  background-color: #B4A4D7;
+  color:black;
+}
+/* #feliz{
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #d5f2fc;
+} */
+:checked + label:before{
+  background-color: #9882F3;
+  content:"✓" ;
+  transform:scale(1);
+  
+}
+
+
+
+
  @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
