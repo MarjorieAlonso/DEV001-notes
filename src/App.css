@@ -81,32 +81,58 @@ p {
   border:none;
   border-radius: 5px;
 }
-#emoticones{
+.emoticones{
   display:flex;
- align-content: space-around;
+ flex-wrap: wrap;
 
 }
-input [type=radio] [id^="emoji"] { 
-display: none;
+
+
+ .emoticones[type=radio]  { 
+position:absolute;
+opacity:0;
+width:0;
+height:0;
 }
+.emoticones  [type=radio] + img {
+  cursor: pointer;
+}
+.emoticones [type=radio]:checked + img {
+  outline: 2px solid #f00;
+}
+
+img{
+  width:50px;
+  height:50px;
+}
+
+
 textarea{
   width: 400px;
   height: 200px;
-  background-color: #B4A4D7;
+  background-color: #c3b6dd;
   color:black;
+  display: flex;
+  justify-content: center;
 }
-/* #feliz{
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
-  background-color: #d5f2fc;
-} */
-:checked + label:before{
+#guardar{
   background-color: #9882F3;
-  content:"✓" ;
-  transform:scale(1);
+  margin-top: 10px;
+}
+#logout{
+  display:inline-block;
+  justify-content: flex-end;
   
 }
+#cerrarSesion{
+background-color:purple;
+position:absolute;
+top:10px;
+right: 20px;
+
+}
+
+
 
 
 
