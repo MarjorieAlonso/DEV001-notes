@@ -15,15 +15,18 @@ import {
 import Form from './main.jsx';
 import SignUp from './Signup';
 import Board from './board';
+import { AuthProvider } from './context/authContext';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Form />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path ="/board" element={<Board/>}/>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Form />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/board" element={<Board />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

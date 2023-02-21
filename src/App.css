@@ -81,39 +81,51 @@ p {
   border:none;
   border-radius: 5px;
 }
-.emoticones{
+.emoticon{
   display:flex;
  flex-wrap: wrap;
+ gap: 10px;
 
 }
-
-
- .emoticones[type=radio]  { 
-position:absolute;
-opacity:0;
-width:0;
-height:0;
-}
-.emoticones  [type=radio] + img {
+.emojiCard{
+  background-color: #D5F2FC;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  width: 100px;
+  height: 120px;
+  justify-content: center;
   cursor: pointer;
 }
-.emoticones [type=radio]:checked + img {
-  outline: 2px solid #f00;
+.emojiCard-selected {
+  background-color: #9882F3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  width: 100px;
+  height: 120px;
+  justify-content: center;
+  cursor: pointer;
 }
-
+.emojiCard h5, .emojiCard-selected h5 {
+  margin: 0;
+}
 img{
   width:50px;
   height:50px;
+  margin-bottom: 15px;
 }
-
-
 textarea{
-  width: 400px;
+  width: 500px;
   height: 200px;
   background-color: #c3b6dd;
   color:black;
   display: flex;
   justify-content: center;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 #guardar{
   background-color: #9882F3;
@@ -122,14 +134,16 @@ textarea{
 #logout{
   display:inline-block;
   justify-content: flex-end;
-  
 }
 #cerrarSesion{
 background-color:purple;
 position:absolute;
 top:10px;
 right: 20px;
-
+}
+label{
+  color:#141313;
+  font-family: 'Poppins', sans-serif;
 }
 
 
