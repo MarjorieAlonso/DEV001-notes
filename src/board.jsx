@@ -22,8 +22,9 @@ function Board() {
         <br />
         <p>Describe how you feel...</p>
         <textarea />
+        <div className='enviar'>
         <button type="submit" id="guardar">Enviar</button>
-
+        </div>
       </form>
       <div id="logout">
         <button type="button" id="cerrarSesion">Logout</button>

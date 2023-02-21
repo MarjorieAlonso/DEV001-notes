@@ -26,7 +26,7 @@ const SignUp = () => {
     try {
       await signup(user.mail, user.contraseña, user.username)
       // console.log(response);
-      navigate('/signup')
+      navigate('/board')
     } catch (error) {
       // console.log(error)
       if (error.code === 'auth/weak-password') {
@@ -39,6 +39,7 @@ const SignUp = () => {
     }
   }
   return (
+    <div>
     <div>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -69,6 +70,7 @@ const SignUp = () => {
         <br />
         <button type="submit" id="register">Start my mood tracker</button>
       </form>
+    </div>
     </div>
   )
 }
