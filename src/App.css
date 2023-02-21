@@ -122,14 +122,20 @@ textarea{
   height: 200px;
   background-color: #c3b6dd;
   color:black;
-  display: flex;
-  justify-content: center;
+ position: relative;
   border-radius: 8px;
   margin-top: 10px;
 }
+
+.enviar{
+  display: flex;
+  justify-content: center;
+}
 #guardar{
   background-color: #9882F3;
-  margin-top: 10px;
+ margin-left: 20px;
+ 
+  
 }
 #logout{
   display:inline-block;
