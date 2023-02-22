@@ -20,6 +20,7 @@ p {
 }
 #email{
   font-family: 'Poppins', sans-serif;
+  color:black;
   border-radius: 5px;
   border:none;
   width: 200px;
@@ -28,6 +29,7 @@ p {
 }
 #password{
   font-family: 'Poppins', sans-serif;
+  color:black;
   margin-top: 8px;
   border-radius: 5px;
   border: none;
@@ -51,10 +53,11 @@ p {
 }
 #username{
   font-family: 'Poppins', sans-serif;
+  color:black;
   border-radius: 5px;
   border:none;
-  width: 200px;
-  height: 25px;
+  width: 218px;
+  height: 30px;
   background-color:white;
   margin-bottom: 5px;
 }
@@ -62,17 +65,19 @@ p {
   font-family: 'Poppins', sans-serif;
   border-radius: 5px;
   border:none;
-  width: 200px;
-  height: 25px;
+  width: 218px;
+  height: 30px;
   background-color:white;
+  color:black;
 } 
 #contraseña{
   font-family: 'Poppins', sans-serif;
+  color:black;
   margin-top: 8px;
   border-radius: 5px;
   border:none;
-  width: 200px;
-  height: 25px;
+  width: 218px;
+  height: 30px;
   background-color:white;
 } 
 #register {
@@ -80,6 +85,7 @@ p {
   background-color: #B4A4D7;
   border:none;
   border-radius: 5px;
+  margin-top: 10px;
 }
 .emoticon{
   display:flex;
@@ -111,6 +117,7 @@ p {
 }
 .emojiCard h5, .emojiCard-selected h5 {
   margin: 0;
+  color:black;
 }
 img{
   width:50px;
