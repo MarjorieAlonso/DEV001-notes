@@ -1,13 +1,23 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { React } from 'react';
+import { useNavigate } from 'react-router';
+import { useAuth } from './context/authContext';
 import './index.css';
 import EmojiCard from './components/EmojiCard';
 
 function Board() {
+  const { user, logout, loading } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    await logout()
+    navigate('/');
+  }
+  if (loading) return <h1>Loading</h1>
   return (
     <>
       <form>
-        <h1>MOOD TRACKER</h1>
+        <h3>Welcome {user.email}</h3>
         <p>Match your emotions to an emoji</p>
         <div className="emoticon">
           <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/smiling-face_263a-fe0f.png" emotion="Happy" />
@@ -22,12 +32,12 @@ function Board() {
         <br />
         <p>Describe how you feel...</p>
         <textarea />
-        <div className='enviar'>
-        <button type="submit" id="guardar">Enviar</button>
+        <div className="enviar">
+          <button type="submit" id="guardar">Enviar</button>
         </div>
       </form>
       <div id="logout">
-        <button type="button" id="cerrarSesion">Logout</button>
+        <button type="button" onClick={handleLogout} id="cerrarSesion">Logout</button>
       </div>
     </>
   )

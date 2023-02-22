@@ -1,12 +1,16 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable import/no-cycle */
+/* eslint-disable import/no-duplicates */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import App from './App';
 // eslint-disable-next-line import/no-cycle
 
 import './index.css';
@@ -22,11 +26,10 @@ const Form = () => {
     email: '',
     password: '',
   });
-  const {login}=useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
   const handleChange = ({ target: { name, value } }) => {
-  
     setUser({ ...user, [name]: value })
   };
   const handleSubmit = async (e) => {
@@ -42,9 +45,9 @@ const Form = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h1>MOOD TRACKER</h1>
-      <input name="email" type="text" id="email" placeholder="email"  onChange={handleChange} />
+      <input name="email" type="text" id="email" placeholder="email" onChange={handleChange} />
       <br />
-      <input  name="password"type="password" id="password" placeholder="password"   onChange={handleChange}/>
+      <input name="password" type="password" id="password" placeholder="password" onChange={handleChange} />
       <p>Use this app to track your feelings and improve your state of mind</p>
       <button type="submit" id="update">Update my mood</button>
       <br />
