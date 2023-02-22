@@ -2,20 +2,28 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context/authContext';
 
+
 const SignUp = () => {
+
   const [user, setUser] = useState({
     mail: '',
     contraseña: '',
   });
   const { signup } = useAuth();
   const navigate = useNavigate();
-  const [error, setError] = useState();
+  const [errorMsg, setError] = useState("");
+
+  useEffect(()=>{
+    if(errorMsg !== '') {
+      alert(errorMsg)
+    }
+  },[errorMsg] )
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value })
@@ -31,17 +39,21 @@ const SignUp = () => {
       // console.log(error)
       if (error.code === 'auth/weak-password') {
         setError('Password should be at least 6 characters')
+      
       } if (error.code === 'auth/invalid-email') {
         setError('Invalid email')
+       
       } if (error.code === 'auth/email-already-in-use') {
         setError('Email already in use')
+      
       }
+      
     }
+   
   }
   return (
     <div>
     <div>
-      {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <h1>MOOD TRACKER</h1>
         <input
