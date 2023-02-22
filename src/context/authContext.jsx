@@ -15,9 +15,8 @@ export function AuthProvider({ children }) {
     return createUserWithEmailAndPassword(auth, email, password, username)
   }
   const login = (email, password)=>{
-    const userCredentials=  signInWithEmailAndPassword(auth, email, password)
+     return signInWithEmailAndPassword(auth, email, password)
    
-  console.log(userCredentials)
   }
   return (
     <authContext.Provider value={{ signup, login }}>{children}</authContext.Provider>
