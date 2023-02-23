@@ -14,10 +14,16 @@ function Board() {
     navigate('/');
   }
   if (loading) return <h1>Loading</h1>
+  let email ;
+  if (user !==null){
+    email=user.email
+  } else (email=null)
   return (
     <>
       <form>
-        <h3>Welcome {user.email}</h3>
+        {email !== null ?<h3>Welcome {email}</h3>: <p>loading</p>}
+        
+
         <p>Match your emotions to an emoji</p>
         <div className="emoticon">
           <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/smiling-face_263a-fe0f.png" emotion="Happy" />

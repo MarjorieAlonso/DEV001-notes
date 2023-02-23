@@ -7,14 +7,14 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import App from './App';
 // eslint-disable-next-line import/no-cycle
 
 import './index.css';
 import { useAuth } from './context/authContext';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -26,7 +26,7 @@ const Form = () => {
     email: '',
     password: '',
   });
-  const { login } = useAuth();
+  const { login , loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
   const handleChange = ({ target: { name, value } }) => {
@@ -39,8 +39,13 @@ const Form = () => {
       await login(user.email, user.password)
       navigate('/board')
     } catch (error) {
-      console.log(error)
+      
     }
+  }
+  const signInGoogle = async ()=>{
+    await loginWithGoogle()
+    navigate('/board') 
+
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -51,7 +56,7 @@ const Form = () => {
       <p>Use this app to track your feelings and improve your state of mind</p>
       <button type="submit" id="update">Update my mood</button>
       <br />
-      <button type="submit" id="botonGoogle">Login with Google</button>
+      <button onClick={signInGoogle} type="button" id="botonGoogle">Login with Google</button>
       <br />
       <Link to="/signup" className="signupLink">Sign me up!</Link>
     </form>
