@@ -12,7 +12,7 @@ import {
 import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut,
+  signOut, GoogleAuthProvider, signInWithPopup,
 } from 'firebase/auth';
 import { auth } from '../assets/firebase';
 
@@ -21,6 +21,10 @@ export const useAuth = () => {
   const context = useContext(authContext)
   if (!context) throw new Error('There is not auth provider')
   return context
+}
+ export const loginWithGoogle = () => {
+  const googleProvider = new GoogleAuthProvider()
+   const popUp= signInWithPopup(auth, googleProvider)
 }
 
 export function AuthProvider({ children }) {
@@ -33,6 +37,8 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password)
   }
   const logout = () => signOut(auth);
+
+  
   useEffect(() => {
     onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
@@ -41,7 +47,7 @@ export function AuthProvider({ children }) {
   }, [])
   return (
     <authContext.Provider value={{
-      signup, login, user, logout, loading,
+      signup, login, user, logout, loading,loginWithGoogle
     }}
     >
       {children}
