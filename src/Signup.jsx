@@ -13,6 +13,7 @@ const SignUp = () => {
   const [user, setUser] = useState({
     mail: '',
     contraseña: '',
+    username: '',
   });
   const { signup } = useAuth();
   const navigate = useNavigate();
@@ -32,7 +33,6 @@ const SignUp = () => {
     setError('');
     try {
       await signup(user.mail, user.contraseña, user.username)
-      // console.log(response);
       navigate('/board')
     } catch (error) {
       // console.log(error)

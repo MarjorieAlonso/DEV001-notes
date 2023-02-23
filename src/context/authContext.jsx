@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
 /* eslint-disable no-unreachable */
 /* eslint-disable react/jsx-no-constructed-context-values */
@@ -22,9 +23,9 @@ export const useAuth = () => {
   if (!context) throw new Error('There is not auth provider')
   return context
 }
- export const loginWithGoogle = () => {
+export const loginWithGoogle = () => {
   const googleProvider = new GoogleAuthProvider()
-   const popUp= signInWithPopup(auth, googleProvider)
+  const popUp = signInWithPopup(auth, googleProvider)
 }
 
 export function AuthProvider({ children }) {
@@ -33,12 +34,10 @@ export function AuthProvider({ children }) {
   const signup = (email, password, username) => {
     return createUserWithEmailAndPassword(auth, email, password, username)
   }
-  const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
+  const login = (email, password, displayName) => {
+    return signInWithEmailAndPassword(auth, email, password, displayName)
   }
   const logout = () => signOut(auth);
-
-  
   useEffect(() => {
     onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
@@ -47,7 +46,7 @@ export function AuthProvider({ children }) {
   }, [])
   return (
     <authContext.Provider value={{
-      signup, login, user, logout, loading,loginWithGoogle
+      signup, login, user, logout, loading, loginWithGoogle,
     }}
     >
       {children}

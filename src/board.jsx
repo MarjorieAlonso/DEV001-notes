@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { React } from 'react';
@@ -10,20 +11,21 @@ function Board() {
   const { user, logout, loading } = useAuth();
   const navigate = useNavigate();
   const handleLogout = async () => {
-    await logout()
-    navigate('/');
+    try {
+      await logout()
+      navigate('/');
+    } catch (error) {
+    }
   }
   if (loading) return <h1>Loading</h1>
-  let email ;
-  if (user !==null){
-    email=user.email
-  } else (email=null)
+  let email;
+  if (user !== null) {
+    email = user.email
+  } else (email = null)
   return (
     <>
       <form>
-        {email !== null ?<h3>Welcome {email}</h3>: <p>loading</p>}
-        
-
+        {email !== null ? <h3>Welcome {user.displayName || email }</h3> : <p>loading</p>}
         <p>Match your emotions to an emoji</p>
         <div className="emoticon">
           <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/smiling-face_263a-fe0f.png" emotion="Happy" />

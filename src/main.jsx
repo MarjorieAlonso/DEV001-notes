@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-cycle */
@@ -7,14 +8,12 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import App from './App';
 // eslint-disable-next-line import/no-cycle
-
 import './index.css';
 import { useAuth } from './context/authContext';
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -26,7 +25,7 @@ const Form = () => {
     email: '',
     password: '',
   });
-  const { login , loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
   const handleChange = ({ target: { name, value } }) => {
@@ -39,13 +38,15 @@ const Form = () => {
       await login(user.email, user.password)
       navigate('/board')
     } catch (error) {
-      
     }
   }
-  const signInGoogle = async ()=>{
-    await loginWithGoogle()
-    navigate('/board') 
-
+  const signInGoogle = async () => {
+    try {
+      await loginWithGoogle()
+      navigate('/board')
+    } catch (error) {
+      setError(error.message)
+    }
   }
   return (
     <form onSubmit={handleSubmit}>
