@@ -1,7 +1,7 @@
 /* eslint-disable no-empty */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { React } from 'react';
+import { React, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from './context/authContext';
 import './index.css';
@@ -10,6 +10,10 @@ import EmojiCard from './components/EmojiCard';
 function Board() {
   const { user, logout, loading } = useAuth();
   const navigate = useNavigate();
+  const valorInicial = {
+    texto: '',
+  }
+  const [usuario, setUsuario] = useState(valorInicial);
   const handleLogout = async () => {
     try {
       await logout()
@@ -22,9 +26,19 @@ function Board() {
   if (user !== null) {
     email = user.email
   } else (email = null)
+
+  const capture = (e) => {
+    const { name, value } = e.target;
+    setUsuario({ ...usuario, [name]: value })
+  }
+  const saveEmotion = async (e) => {
+    e.preventDefault();
+    // console.log(usuario);
+    setUsuario({ ...valorInicial })
+  }
   return (
     <>
-      <form>
+      <form onSubmit={saveEmotion}>
         {email !== null ? <h3>Welcome {user.displayName || email }</h3> : <p>loading</p>}
         <p>Match your emotions to an emoji</p>
         <div className="emoticon">
@@ -39,7 +53,7 @@ function Board() {
         </div>
         <br />
         <p>Describe how you feel...</p>
-        <textarea />
+        <textarea name="texto" onChange={capture} value={usuario.texto} />
         <div className="enviar">
           <button type="submit" id="guardar">Enviar</button>
         </div>
