@@ -1,11 +1,13 @@
 /* eslint-disable no-empty */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from './context/authContext';
 import './index.css';
 import EmojiCard from './components/EmojiCard';
+import {collection,addDoc,getDoc,doc,getDocs,deleteDoc,setDoc}from'firebase/firestore'
+import { db } from './assets/firebase';
 
 function Board() {
   const { user, logout, loading } = useAuth();
@@ -14,6 +16,23 @@ function Board() {
     texto: '',
   }
   const [usuario, setUsuario] = useState(valorInicial);
+  const [lista, setLista]=useState([]);
+  useEffect(()=>{
+const getLista= async()=>{
+  try { 
+    const querySnapshot= await getDocs(collection(db,'nota'))
+    const docs=[];
+    querySnapshot.forEach((doc)=>{
+      docs.push({...doc.data(), id:doc.id})
+    })
+    setLista(docs)
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+getLista()
+  },[])
   const handleLogout = async () => {
     try {
       await logout()
@@ -33,7 +52,13 @@ function Board() {
   }
   const saveEmotion = async (e) => {
     e.preventDefault();
-    // console.log(usuario);
+   try {
+    await(addDoc(collection(db,'nota'),{
+      ...usuario
+    }))
+   } catch (error) {
+    console.log(error)
+   }
     setUsuario({ ...valorInicial })
   }
   return (
@@ -60,6 +85,17 @@ function Board() {
       </form>
       <div id="logout">
         <button type="button" onClick={handleLogout} id="cerrarSesion">Logout</button>
+      </div>
+      <div className='container'>
+        {
+          lista.map(lest=>(
+            <div key={lest.id}>  
+               <p>I felt:{lest.texto} </p>
+               <button className='btn-Delete'>Delete</button>
+               <button className='btn-Edit'> Edit</button>
+            </div>
+          ))
+        }
       </div>
     </>
   )
