@@ -1,12 +1,24 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable arrow-parens */
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-empty */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { React, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import {
+  collection,
+  addDoc,
+  getDoc,
+  doc,
+  getDocs,
+  deleteDoc,
+  setDoc,
+} from 'firebase/firestore';
 import { useAuth } from './context/authContext';
 import './index.css';
 import EmojiCard from './components/EmojiCard';
-import {collection,addDoc,getDoc,doc,getDocs,deleteDoc,setDoc}from'firebase/firestore'
 import { db } from './assets/firebase';
 
 function Board() {
@@ -16,23 +28,25 @@ function Board() {
     texto: '',
   }
   const [usuario, setUsuario] = useState(valorInicial);
-  const [lista, setLista]=useState([]);
-  useEffect(()=>{
-const getLista= async()=>{
-  try { 
-    const querySnapshot= await getDocs(collection(db,'nota'))
-    const docs=[];
-    querySnapshot.forEach((doc)=>{
-      docs.push({...doc.data(), id:doc.id})
-    })
-    setLista(docs)
-    
-  } catch (error) {
-    console.log(error)
+  const [lista, setLista] = useState([]);
+  useEffect(() => {
+    const getLista = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'nota'))
+        const docs = [];
+        querySnapshot.forEach((doc) => {
+          docs.push({ ...doc.data(), id: doc.id })
+        })
+        setLista(docs)
+      } catch (error) {
+        // console.log(error)
+      }
+    }
+    getLista()
+  }, [])
+  const deleteUser = async (id) => {
+    await deleteDoc(doc(db, 'nota', id))
   }
-}
-getLista()
-  },[])
   const handleLogout = async () => {
     try {
       await logout()
@@ -52,13 +66,13 @@ getLista()
   }
   const saveEmotion = async (e) => {
     e.preventDefault();
-   try {
-    await(addDoc(collection(db,'nota'),{
-      ...usuario
-    }))
-   } catch (error) {
-    console.log(error)
-   }
+    try {
+      await (addDoc(collection(db, 'nota'), {
+        ...usuario,
+      }))
+    } catch (error) {
+      // console.log(error)
+    }
     setUsuario({ ...valorInicial })
   }
   return (
@@ -86,13 +100,13 @@ getLista()
       <div id="logout">
         <button type="button" onClick={handleLogout} id="cerrarSesion">Logout</button>
       </div>
-      <div className='container'>
+      <div className="container">
         {
-          lista.map(lest=>(
-            <div key={lest.id}>  
-               <p>I felt:{lest.texto} </p>
-               <button className='btn-Delete'>Delete</button>
-               <button className='btn-Edit'> Edit</button>
+          lista.map(lest => (
+            <div key={lest.id}>
+              <p>I felt:{lest.texto} </p>
+              <button className="btn-Delete" onClick={() => deleteUser(lest.id)}>Delete</button>
+              <button className="btn-Edit"> Edit</button>
             </div>
           ))
         }
