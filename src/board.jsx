@@ -29,6 +29,7 @@ function Board() {
   }
   const [usuario, setUsuario] = useState(valorInicial);
   const [lista, setLista] = useState([]);
+  const[subId,setSubId]= useState('');
   useEffect(() => {
     const getLista = async () => {
       try {
@@ -44,9 +45,27 @@ function Board() {
     }
     getLista()
   }, [])
+  // funcion de editar
+  const getOne =async (id)=>{
+try {
+  const docRef= doc(db,'nota',id)
+  const docSnap = await getDoc(docRef)
+  setUsuario(docSnap.data())
+ 
+} catch (error) {
+  console.log(error)
+}
+  }
+  useEffect(()=>{
+if (subId !==''){
+  getOne(subId)
+}
+  }, [subId]);
+  //funcion de borrar
   const deleteUser = async (id) => {
     await deleteDoc(doc(db, 'nota', id))
   }
+  // funcion de cierre de sesion
   const handleLogout = async () => {
     try {
       await logout()
@@ -59,21 +78,30 @@ function Board() {
   if (user !== null) {
     email = user.email
   } else (email = null)
-
+// capturar los valores del imput
   const capture = (e) => {
     const { name, value } = e.target;
     setUsuario({ ...usuario, [name]: value })
   }
+
+  // guarda lo del textarea en la base de datos 
   const saveEmotion = async (e) => {
     e.preventDefault();
-    try {
-      await (addDoc(collection(db, 'nota'), {
-        ...usuario,
-      }))
-    } catch (error) {
-      // console.log(error)
+    if(subId === ''){
+      try {
+        await (addDoc(collection(db, 'nota'), {
+          ...usuario,
+        }))
+      } catch (error) {
+        console.log(error)
+      }
+    } else{
+      await setDoc(doc(db,'nota',subId),{
+        ...usuario
+      })
     }
     setUsuario({ ...valorInicial })
+    setSubId('')
   }
   return (
     <>
@@ -94,7 +122,7 @@ function Board() {
         <p>Describe how you feel...</p>
         <textarea name="texto" onChange={capture} value={usuario.texto} />
         <div className="enviar">
-          <button type="submit" id="guardar">Enviar</button>
+          <button type="submit" id="guardar">{subId===''? 'Save': 'Update'}</button>
         </div>
       </form>
       <div id="logout">
@@ -106,7 +134,7 @@ function Board() {
             <div key={lest.id}>
               <p>I felt:{lest.texto} </p>
               <button className="btn-Delete" onClick={() => deleteUser(lest.id)}>Delete</button>
-              <button className="btn-Edit"> Edit</button>
+              <button className="btn-Edit" onClick={()=>setSubId(lest.id)}> Edit</button>
             </div>
           ))
         }
