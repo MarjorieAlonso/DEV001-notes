@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 
 const EmojiCard = ({ imagePath, emotion }) => {
   const [isSelected, setIsSelected] = useState(false);
+  // const [selectEmotion, setSelectEmotion] = useState();
   return (
     <div className="container">
       <div onClick={() => setIsSelected(lastState => !lastState)} className={isSelected ? 'emojiCard-selected' : 'emojiCard'}>

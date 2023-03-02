@@ -53,7 +53,7 @@ function Board() {
       const docSnap = await getDoc(docRef)
       setUsuario(docSnap.data())
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
   useEffect(() => {
@@ -94,7 +94,7 @@ function Board() {
           ...usuario,
         }))
       } catch (error) {
-        console.log(error)
+        // console.log(error)
       }
     } else {
       await setDoc(doc(db, 'nota', subId), {
@@ -122,7 +122,7 @@ function Board() {
         </div>
         <br />
         <p>Describe how you feel...</p>
-        <textarea name="texto" onChange={capture} value={usuario.texto} />
+        <textarea name="texto" onChange={capture} value={usuario.texto} placeholder="I feel" />
         <div className="enviar">
           <button type="submit" id="guardar">{subId === '' ? 'Save' : 'Update'}</button>
         </div>
@@ -133,8 +133,8 @@ function Board() {
       <div className="container">
         {
           lista.map(lest => (
-            <div key={lest.id}>
-              <p>I felt:{lest.texto} </p>
+            <div key={lest.id} className="notas">
+              <p>{lest.texto} </p>
               <button className="btn-Delete" onClick={() => deleteUser(lest.id)}>Delete</button>
               <button className="btn-Edit" onClick={() => setSubId(lest.id)}> Edit</button>
             </div>
