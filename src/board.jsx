@@ -30,19 +30,20 @@ function Board() {
   const [usuario, setUsuario] = useState(valorInicial);
   const [lista, setLista] = useState([]);
   const[subId,setSubId]= useState('');
-  useEffect(() => {
-    const getLista = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'nota'))
-        const docs = [];
-        querySnapshot.forEach((doc) => {
-          docs.push({ ...doc.data(), id: doc.id })
-        })
-        setLista(docs)
-      } catch (error) {
-        // console.log(error)
-      }
+  const getLista = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'nota'))
+      const docs = [];
+      querySnapshot.forEach((doc) => {
+        docs.push({ ...doc.data(), id: doc.id })
+      })
+      setLista(docs)
+    } catch (error) {
+      // console.log(error)
     }
+  }
+  useEffect(() => {
+    
     getLista()
   }, [])
   // funcion de editar
@@ -56,6 +57,7 @@ try {
   console.log(error)
 }
   }
+  getLista()
   useEffect(()=>{
 if (subId !==''){
   getOne(subId)
@@ -64,6 +66,7 @@ if (subId !==''){
   //funcion de borrar
   const deleteUser = async (id) => {
     await deleteDoc(doc(db, 'nota', id))
+    getLista()
   }
   // funcion de cierre de sesion
   const handleLogout = async () => {
@@ -82,6 +85,7 @@ if (subId !==''){
   const capture = (e) => {
     const { name, value } = e.target;
     setUsuario({ ...usuario, [name]: value })
+
   }
 
   // guarda lo del textarea en la base de datos 
@@ -100,6 +104,7 @@ if (subId !==''){
         ...usuario
       })
     }
+    getLista()
     setUsuario({ ...valorInicial })
     setSubId('')
   }
