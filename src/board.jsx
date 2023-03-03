@@ -18,7 +18,7 @@ import {
   setDoc,
 } from 'firebase/firestore';
 import { useAuth } from './context/authContext';
-import './index.css';
+import './App.css';
 import EmojiCard from './components/EmojiCard';
 import { db } from './assets/firebase';
 
@@ -31,9 +31,15 @@ function Board() {
   const [usuario, setUsuario] = useState(valorInicial);
   const [lista, setLista] = useState([]);
   const [subId, setSubId] = useState('');
+  let dataUser;
+  if (loading === true) {
+    return <h1>Loading</h1>
+  } if (loading === false) {
+    dataUser = user.uid;
+  }
   const getLista = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'nota'))
+      const querySnapshot = await getDocs(collection(db, `nota${dataUser}`))
       const docs = [];
       querySnapshot.forEach((doc) => {
         docs.push({ ...doc.data(), id: doc.id })
@@ -49,7 +55,7 @@ function Board() {
   // funcion de editar
   const getOne = async (id) => {
     try {
-      const docRef = doc(db, 'nota', id)
+      const docRef = doc(db, `nota${dataUser}`, id)
       const docSnap = await getDoc(docRef)
       setUsuario(docSnap.data())
     } catch (error) {
@@ -63,7 +69,7 @@ function Board() {
   }, [subId]);
   // funcion de borrar
   const deleteUser = async (id) => {
-    await deleteDoc(doc(db, 'nota', id))
+    await deleteDoc(doc(db, `nota${dataUser}`, id))
     getLista()
   }
   // funcion de cierre de sesion
@@ -90,14 +96,14 @@ function Board() {
     e.preventDefault();
     if (subId === '') {
       try {
-        await (addDoc(collection(db, 'nota'), {
+        await (addDoc(collection(db, `nota${dataUser}`), {
           ...usuario,
         }))
       } catch (error) {
         // console.log(error)
       }
     } else {
-      await setDoc(doc(db, 'nota', subId), {
+      await setDoc(doc(db, `nota${dataUser}`, subId), {
         ...usuario,
       })
     }
@@ -107,7 +113,7 @@ function Board() {
   }
   return (
     <>
-      <form onSubmit={saveEmotion}>
+      <form id="formBoard" onSubmit={saveEmotion}>
         {email !== null ? <h3>Welcome {user.displayName || email }</h3> : <p>loading</p>}
         <p>Match your emotions to an emoji</p>
         <div className="emoticon">
