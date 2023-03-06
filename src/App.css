@@ -1,7 +1,12 @@
 body {
   background-image:linear-gradient(#9882F3, white);
+  background-size:cover ;
+  background-repeat: no-repeat;
+ 
 }
 #root {
+  background-size:cover ;
+  background-repeat: no-repeat;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -91,6 +96,9 @@ p {
   border-radius: 5px;
   margin-top: 10px;
 }
+.signupLink{
+  font-family: 'Poppins', sans-serif;
+}
 .emoticon{
  display: grid;
  grid-template-columns: auto auto auto auto;
@@ -98,6 +106,7 @@ p {
  gap: 10px;
 }
 .emojiCard{
+  font-family: 'Poppins', sans-serif;
   background-color: #D5F2FC;
   display: flex;
   flex-direction: column;
@@ -109,6 +118,7 @@ p {
   cursor: pointer;
 }
 .emojiCard-selected {
+  font-family: 'Poppins', sans-serif;
   background-color: #9882F3;
   display: flex;
   flex-direction: column;
@@ -120,6 +130,7 @@ p {
   cursor: pointer;
 }
 .emojiCard h5, .emojiCard-selected h5 {
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   color:black;
 }
@@ -142,33 +153,75 @@ textarea{
   justify-content: center;
 }
 #guardar{
+  font-family: 'Poppins', sans-serif;
   background-color: #9882F3;
   margin-left: 20px;
-  font-family: 'Poppins', sans-serif;
+  border-radius: 7px;
+  border:none;
+  
 }
 #logout{
   display:inline-block;
   justify-content: flex-end;
 }
 #cerrarSesion{
+font-family: 'Poppins', sans-serif;
 background-color:rgba(190, 68, 190, 0.507);
+border-radius:7px ;
 position:absolute;
 top:10px;
 right: 20px;
-font-family: 'Poppins', sans-serif;
+border:none;
+
 }
 label{
-  color:#141313;
   font-family: 'Poppins', sans-serif;
+  color:#141313;
+ 
 }
 .btn-Delete{
+  font-family: 'Poppins', sans-serif;
   background-color: rgba(255, 0, 0, 0.71);
   margin-right: 10px;
-  font-family: 'Poppins', sans-serif;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  border:none;
 }
 .btn-Edit{
-  background-color: #9982f3bb;
   font-family: 'Poppins', sans-serif;
+  background-color: #9982f3bb;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  border:none;
+  
+}
+.notas{
+  border-radius: 7px;
+  outline-style: solid;
+  outline-color:rgb(148, 78, 133);
+  box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+  margin-bottom: 10 px;
+
 }
 
-
+@media only screen
+and (min-width: 320px)
+and (max-width: 1024px)
+{  body{
+  background-size:cover ;
+  background-repeat: no-repeat;
+  overflow-y: scroll;
+  width:100%;
+  height:100%;
+}
+#root{
+  background-size:cover ;
+  background-repeat: no-repeat;
+  overflow-y: scroll;
+width: 70%;
+height: 70%;
+}
+textarea{
+  width: 80%;
+}
+}

@@ -12,7 +12,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import App from './App';
 // eslint-disable-next-line import/no-cycle
-import './index.css';
+import './App.css';
 import { useAuth } from './context/authContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
