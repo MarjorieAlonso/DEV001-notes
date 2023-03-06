@@ -4,7 +4,7 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
 import React, { useEffect } from 'react';
-import './index.css';
+import './App.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './context/authContext';
