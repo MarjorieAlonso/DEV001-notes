@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1678207630196" clover="3.2.0">
+  <project timestamp="1678207630197" name="All files">
+    <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="4" coveredelements="0" complexity="0" loc="4" ncloc="4" packages="1" files="1" classes="1"/>
+    <file name="firebase.jsx" path="C:\Users\chica\OneDrive\Documentos\Lab-Notes\DEV001-notes\src\assets\firebase.jsx">
+      <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="6" count="0" type="stmt"/>
+      <line num="15" count="0" type="stmt"/>
+      <line num="16" count="0" type="stmt"/>
+      <line num="17" count="0" type="stmt"/>
+    </file>
+  </project>
+</coverage>
