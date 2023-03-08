@@ -12,7 +12,7 @@ import {
   BrowserRouter, Routes,
   Route,
 } from 'react-router-dom';
-import Form from './main.jsx';
+import Form from './components/Form';
 import SignUp from './Signup';
 import Board from './board';
 import { AuthProvider } from './context/authContext';

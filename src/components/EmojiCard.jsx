@@ -3,33 +3,20 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
-import React, { createContext, useState } from 'react';
+import React, { useContext } from 'react';
+import EmojiContext from '../context/emojiContext';
 
-
-
-
-const EmojiCard = ({ imagePath, emotion }) => {
- /*  const defaultGlobalState={
-    select:'true', 
-    notSelect:'false',  
-    }
-    const handleCurrentChange= ()=>{
-      defaultGlobalState()
-    } */
-  const [isSelected, setIsSelected] = useState(false);
-
-   /*  const globalStateContext= createContext(defaultGlobalState)
-    const globalStateProvider =({children})=>{
-      
-    } */
+const EmojiCard = ({ imagePath, emotion, isSelected }) => {
+  const { setListEmojisSelect } = useContext(EmojiContext);
+  const handleEmoji = (emoji) => {
+    setListEmojisSelect(emoji)
+  }
+  const claseEmoji = isSelected ? 'emojiCard-selected' : 'emojiCard'
   return (
-    <div className="container" >
-      <div onClick={() => setIsSelected(lastState => !lastState)} className={isSelected ? 'emojiCard-selected' : 'emojiCard'}>
-        <img src={imagePath} alt={emotion} />
-        <h5>{emotion}</h5>
-      </div>
+    <div className={claseEmoji} onClick={() => handleEmoji({ imagePath, emotion })}>
+      <img src={imagePath} alt={emotion} />
+      <h5>{emotion}</h5>
     </div>
   )
 }
 export default EmojiCard;
-

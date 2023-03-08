@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable max-len */
 /* eslint-disable no-undef */
 /* eslint-disable react/button-has-type */
 /* eslint-disable arrow-parens */
@@ -6,7 +8,9 @@
 /* eslint-disable no-empty */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { React, useEffect, useState } from 'react';
+import {
+  React, useContext, useEffect, useState,
+} from 'react';
 import { useNavigate } from 'react-router';
 import {
   collection,
@@ -21,9 +25,12 @@ import { useAuth } from './context/authContext';
 import './App.css';
 import EmojiCard from './components/EmojiCard';
 import { db } from './assets/firebase';
+import listEmojis from './assets/emojis';
+import EmojiContext from './context/emojiContext';
 
 function Board() {
   const { user, logout, loading } = useAuth();
+  const { listEmojisSelect } = useContext(EmojiContext);
   const navigate = useNavigate();
   const valorInicial = {
     texto: '',
@@ -111,20 +118,22 @@ function Board() {
     setUsuario({ ...valorInicial })
     setSubId('')
   }
+  const [isListEmojiSelect, setListEmojisSelect] = useState(null);
+  useEffect(() => {
+    const list = listEmojis.map(emoji => emoji.emotion === listEmojisSelect.emotion)
+    setListEmojisSelect(list.indexOf(true))
+  }, [listEmojisSelect])
   return (
     <>
       <form id="formBoard" onSubmit={saveEmotion}>
         {email !== null ? <h3>Welcome {user.displayName || email }</h3> : <p>loading</p>}
         <p>Match your emotions to an emoji</p>
         <div className="emoticon">
-          <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/smiling-face_263a-fe0f.png" emotion="Happy" />
-          <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/pouting-face_1f621.png" emotion="Angry" />
-          <EmojiCard imagePath="https://em-content.zobj.net/source/noto-emoji-animations/344/disappointed-face_1f61e.gif" emotion="Sad" />
-          <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/grimacing-face_1f62c.png" emotion="Stressed" />
-          <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/smiling-face-with-heart-eyes_1f60d.png" emotion="In Love" />
-          <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/neutral-face_1f610.png" emotion="Neutral" />
-          <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/anxious-face-with-sweat_1f630.png" emotion="Anxious" />
-          <EmojiCard imagePath="https://em-content.zobj.net/source/microsoft-teams/337/nauseated-face_1f922.png" emotion="Sick" />
+          {listEmojis.map((emoji, i) => (
+            isListEmojiSelect === i
+              ? <EmojiCard key={i} imagePath={emoji.imagePath} emotion={emoji.emotion} isSelected />
+              : <EmojiCard key={i} imagePath={emoji.imagePath} emotion={emoji.emotion} isSelected={false} />
+          ))}
         </div>
         <br />
         <p>Describe how you feel...</p>

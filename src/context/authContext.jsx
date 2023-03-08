@@ -26,6 +26,7 @@ export const useAuth = () => {
 export const loginWithGoogle = () => {
   const googleProvider = new GoogleAuthProvider()
   const popUp = signInWithPopup(auth, googleProvider)
+  return popUp
 }
 
 export function AuthProvider({ children }) {
